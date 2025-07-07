@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('login');
     }
 
     public function login(Request $request)
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function showRegisterForm()
     {
-        return view('auth.register');
+        return view('register');
     }
 
     public function register(Request $request)
@@ -52,6 +52,12 @@ class AuthController extends Controller
             'username' => 'required|string|max:50|unique:customer,username',
             'password' => 'required|string|min:6|confirmed',
         ]);
+        
+        $namaKotaInput = strtolower($validated['nama_kota']);
+        $kota = Kota::whereRaw('LOWER(nama_kota) = ?', [$namaKotaInput])->first();
+        if (!$kota) {
+            return back()->withErrors(['nama_kota' => 'Nama kota tidak ditemukan di database.']);
+        }
 
         $customer = customer::create([
             'nama_customer' => $request->nama_customer,

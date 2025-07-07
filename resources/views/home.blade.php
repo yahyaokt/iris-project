@@ -2,70 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Warehouse App Home</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
-        .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        h2 {
+
+        .container {
             text-align: center;
-            margin-bottom: 20px;
+            background-color: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        input[type="Username"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            box-sizing: border-box;
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 48px;
+            color: #333;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            color: white;
+
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 30px;
+            font-size: 16px;
             border: none;
-            margin-top: 10px;
+            border-radius: 6px;
             cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
         }
-        button:hover {
-            background: #0056b3;
+
+        .btn-signin {
+            background-color: #007BFF;
+            color: white;
         }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
+
+        .btn-signin:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-signup {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-signup:hover {
+            background-color: #1e7e34;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <input type="username" name="username" placeholder="Username" required>
-            @error('username')
-                <div class="error">{{ $message }}</div>
-            @enderror
-
-            <input type="password" name="password" placeholder="Password" required>
-            @error('password')
-                <div class="error">{{ $message }}</div>
-            @enderror
-
-            <button type="submit">Login</button>
-        </form>
+    <div class="container">
+        <h1>Welcome to Warehouse App</h1>
+        <a href="{{ route('login') }}" class="btn btn-signin">Sign In</a>
+        <a href="{{ route('register') }}" class="btn btn-signup">Sign Up</a>
     </div>
 </body>
 </html>
