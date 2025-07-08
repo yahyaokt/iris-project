@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_storage');
             $table->unsignedBigInteger('id_warehouse');
             $table->foreign('id_warehouse')->references('id_warehouse')->on('warehouse')->onDelete('cascade');
-            $table->string('id_barang');
+            $table->string('id_barang', 10); // Custom ID for barang
             $table->foreign('id_barang')->references('id_barang')->on('barang')->onDelete('cascade');
             $table->integer('quantity');
         });

@@ -11,6 +11,7 @@ class Storage extends Model
 
     protected $table = 'storage';
     protected $primaryKey = 'id_storage'; 
+    public $timestamps = false;
 
     protected $fillable = [
         'id_warehouse',

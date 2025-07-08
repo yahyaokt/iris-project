@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\BarangController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,6 +26,7 @@ Route::middleware(['auth:customer'])->prefix('customer')->group(function () {
 
 Route::middleware(['auth:warehouse'])->prefix('warehouse')->group(function () {
     Route::get('/home', [WarehouseController::class, 'index'])->name('warehouse.home');
+    Route::post('/barang/store', [BarangController::class, 'store'])->name('barang.store');
 });
 
 Route::middleware(['auth:driver'])->prefix('driver')->group(function () {
