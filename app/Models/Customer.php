@@ -11,6 +11,7 @@ class Customer extends Authenticatable
 
     protected $table = 'customer';
     protected $primaryKey = 'id_customer'; 
+    public $timestamps = false;
 
     protected $fillable = [
         'nama_customer',
@@ -18,6 +19,7 @@ class Customer extends Authenticatable
         'alamat',
         'nomor_telepon',
         'password',
+        'nama_kota',
         'id_kota',
     ];
 

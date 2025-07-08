@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\PetugasController;
 
 Route::get('/', function () {
     return view('home');
@@ -28,4 +29,8 @@ Route::middleware(['auth:warehouse'])->prefix('warehouse')->group(function () {
 
 Route::middleware(['auth:driver'])->prefix('driver')->group(function () {
     Route::get('/home', [DriverController::class, 'index'])->name('driver.home');
+});
+
+Route::middleware(['auth:petugas'])->prefix('petugas')->group(function () {
+    Route::get('/home', [PetugasController::class, 'index'])->name('petugas.home');
 });

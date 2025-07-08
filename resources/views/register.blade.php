@@ -58,6 +58,7 @@
             <input type="text" name="nama_kota" placeholder="Nama Kota" required>
             <input type="text" name="nomor_telepon" placeholder="Nomor Telepon" required>
             <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
 
             <button type="submit">Sign Up</button>
         </form>

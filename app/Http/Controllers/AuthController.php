@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
 use App\Models\Driver;
 use App\Models\Warehouse;
+use App\Models\Petugas;
+use App\Models\Kota;
 
 class AuthController extends Controller
 {
@@ -34,6 +36,10 @@ class AuthController extends Controller
             return redirect()->intended('/driver/home');
         }
 
+        if (Auth::guard('petugas')->attempt($credentials)) {
+            return redirect()->intended('/petugas/home');
+        }
+
         return back()->withErrors(['login' => 'Username atau password tidak valid.']);
     }
 
@@ -44,7 +50,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama_customer' => 'required|string|max:100',
             'alamat' => 'required|string',
             'nama_kota' => 'required|string',
@@ -52,26 +58,27 @@ class AuthController extends Controller
             'username' => 'required|string|max:50|unique:customer,username',
             'password' => 'required|string|min:6|confirmed',
         ]);
-        
+
         $namaKotaInput = strtolower($validated['nama_kota']);
         $kota = Kota::whereRaw('LOWER(nama_kota) = ?', [$namaKotaInput])->first();
         if (!$kota) {
             return back()->withErrors(['nama_kota' => 'Nama kota tidak ditemukan di database.']);
         }
 
-        $customer = customer::create([
-            'nama_customer' => $request->nama_customer,
-            'alamat' => $request->alamat,
-            'nomor_telepon' => $request->nomor_telepon,
-            'username' => $request->username,
-            'nama_kota' => $request->nama_kota,
-            'password' => bcrypt($request->password),
+        $customer = Customer::create([
+            'nama_customer' => $validated['nama_customer'],
+            'alamat' => $validated['alamat'],
+            'nomor_telepon' => $validated['nomor_telepon'],
+            'username' => $validated['username'],
+            'nama_kota' => $validated['nama_kota'],
+            'password' => bcrypt($validated['password']),
+            'id_kota' => $kota->id_kota
         ]);
 
         Auth::guard('customer')->login($customer);
 
-        return redirect('/customer/home');
-    }
+        return redirect()->route('customer.home');
+}
 
     public function logout(Request $request)
     {
@@ -85,6 +92,10 @@ class AuthController extends Controller
 
         if (Auth::guard('driver')->check()) {
             Auth::guard('driver')->logout();
+        }
+
+        if (Auth::guard('petugas')->check()) {
+            Auth::guard('petugas')->logout();
         }
         return redirect('/');
     }

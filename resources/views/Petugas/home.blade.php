@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer</title>
+    <title>Petugas</title>
     <style>
         body {
             margin: 0;
@@ -22,6 +22,6 @@
     </style>
 </head>
 <body>
-    <h1>CUSTOMER</h1>
+    <h1>PETUGAS</h1>
 </body>
 </html>

@@ -40,22 +40,24 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
-        'customer' => [
-            'driver' => 'session',
-            'provider' => 'customers',
-        ],
-
         'warehouse' => [
             'driver' => 'session',
             'provider' => 'warehouses',
         ],
-
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
         'driver' => [
             'driver' => 'session',
             'provider' => 'drivers',
         ],
+        'petugas' => [
+            'driver' => 'session',   // Ensure the petugas guard is defined here
+            'provider' => 'petugas', // Link it to the correct provider
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -79,20 +81,21 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        'customers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Customer::class,
-        ],
-
         'warehouses' => [
             'driver' => 'eloquent',
             'model' => App\Models\Warehouse::class,
         ],
-
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
         'drivers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Driver::class, // Pastikan model driver sudah ada
+            'model' => App\Models\Driver::class,
+        ],
+        'petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petugas::class,  // Make sure this is defined
         ],
     ],
 
